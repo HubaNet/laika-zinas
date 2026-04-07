@@ -6,65 +6,80 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>Laika ziņas</title>
   <link rel="stylesheet" href="style.css">
-<style>
-  body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.5em;
-    text-align: center;
-  }
-  table {
-    border-collapse: collapse;
-    margin: 20px;
-    margin: auto;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
- 
-</style>
+
 </head>
 <body>
 <h3>Laika ziņas Rīga</h3>
 <table>
   <tr>
-    <th contenteditable="true">O</th>
-    <th contenteditable="true">T</th>
-    <th contenteditable="true">C</th>
+    <td class="dropdown-cell" onclick="toggleDayDropdown(event)">
+    Ot
+    <div class="dropdown-menu">
+        <div class="dropdown-option" onclick="selectOption(event, 'Pr')">Pr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ot')">Ot</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Tr')">Tr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ce')">Ce</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Pk')">Pk</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Se')">Se</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Sv')">Sv</div>
+    </div>
+</td>
+    <td class="dropdown-cell" onclick="toggleDayDropdown(event)">
+    Tr
+    <div class="dropdown-menu">
+        <div class="dropdown-option" onclick="selectOption(event, 'Pr')">Pr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ot')">Ot</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Tr')">Tr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ce')">Ce</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Pk')">Pk</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Se')">Se</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Sv')">Sv</div>
+    </div>
+</td>
+    <td class="dropdown-cell" onclick="toggleDayDropdown(event)">
+    Ce
+    <div class="dropdown-menu">
+        <div class="dropdown-option" onclick="selectOption(event, 'Pr')">Pr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ot')">Ot</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Tr')">Tr</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Ce')">Ce</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Pk')">Pk</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Se')">Se</div>
+        <div class="dropdown-option" onclick="selectOption(event, 'Sv')">Sv</div>
+    </div>
+</td>
   </tr>
   <tr>
-    <td class="image-cell" onclick="toggleDropdown(this)">
-      <img src="./weather4.png" alt="Selected">
-      <div class="dropdown">
+    <td class="image-cell" onclick="toggleImageDropdown(this)">
+    <img src="./weather4.png" alt="Selected">
+    <div class="dropdown">
         <img src="./weather2.png" onclick="selectImage(this)">
         <img src="./weather3.png" onclick="selectImage(this)">
         <img src="./weather4.png" onclick="selectImage(this)">
         <img src="./weather5.png" onclick="selectImage(this)">
         <img src="./weather6.png" onclick="selectImage(this)">
-      </div>
-    </td>
-    <td class="image-cell" onclick="toggleDropdown(this)">
-      <img src="./weather3.png" alt="Selected">
-      <div class="dropdown">
+    </div>
+</td>
+    <td class="image-cell" onclick="toggleImageDropdown(this)">
+    <img src="./weather3.png" alt="Selected">
+    <div class="dropdown">
         <img src="./weather2.png" onclick="selectImage(this)">
         <img src="./weather3.png" onclick="selectImage(this)">
         <img src="./weather4.png" onclick="selectImage(this)">
         <img src="./weather5.png" onclick="selectImage(this)">
         <img src="./weather6.png" onclick="selectImage(this)">
-      </div>
-    </td>
-    <td class="image-cell" onclick="toggleDropdown(this)">
-      <img src="./weather3.png" alt="Selected">
-      <div class="dropdown">
+    </div>
+</td>
+    <td class="image-cell" onclick="toggleImageDropdown(this)">
+    <img src="./weather3.png" alt="Selected">
+    <div class="dropdown">
         <img src="./weather2.png" onclick="selectImage(this)">
         <img src="./weather3.png" onclick="selectImage(this)">
         <img src="./weather4.png" onclick="selectImage(this)">
         <img src="./weather5.png" onclick="selectImage(this)">
         <img src="./weather6.png" onclick="selectImage(this)">
-      </div>
-    </td>
+    </div>
+</td>
   </tr>
   <tr>
     <td><b><span contenteditable="true">4</span>°</b>  <span contenteditable="true">2</span>°</td>
@@ -75,45 +90,14 @@
 
 <p style="font-size: small;">ziņu avots Google</p>
 <p style="font-size: small;" id="dateTime"></p>
-<script>
+<br>
+<br>
+<div class="button-group">
+            <button class="light-btn" onclick="setLightMode()">☀️ Light Mode</button>
+            <button class="dark-btn" onclick="setDarkMode()">🌙 Dark Mode</button>
+        </div>
+<script src="./script.js">
 
-function updateDateTime() {
-            const now = new Date();
-            
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            
-            const formattedDateTime = `${year}.${month}.${day} ${hours}:${minutes}`;
-            document.getElementById('dateTime').textContent = "Dati atjaunoti " + formattedDateTime;
-        }
-        
-        updateDateTime();
-        setInterval(updateDateTime, 1000); // Update every second
-
-function toggleDropdown(cell) {
-  const dropdown = cell.querySelector('.dropdown');
-  dropdown.classList.toggle('show');
-}
-
-function selectImage(imgElement) {
-  const cell = imgElement.closest('.image-cell');
-  const displayImg = cell.querySelector('img:first-child');
-  displayImg.src = imgElement.src;
-  
-  // Close dropdown after selection
-  const dropdown = cell.querySelector('.dropdown');
-  dropdown.classList.remove('show');
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-  if (!event.target.closest('.image-cell')) {
-    document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
-  }
-});
 </script>
 
 </body>
